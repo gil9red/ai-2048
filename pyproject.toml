@@ -1,6 +1,6 @@
 [project]
 name = "ai-2048"
-version = "2026.6.17"
+version = "2026.6.21"
 description = "Autonomous 2048 game player using Playwright and Qwen-VL"
 authors = [
     { name = "gil9red", email = "ilya.petrash@inbox.ru" }

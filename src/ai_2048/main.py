@@ -7,7 +7,7 @@ __author__ = "ipetrash"
 import argparse
 import time
 
-from dataclasses import dataclass, field
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from logging import getLogger
 
@@ -112,13 +112,34 @@ def run_site(site: SiteConfig) -> None:
 
 
 if __name__ == "__main__":
-    site: SiteConfig = SITE_CONFIGS[0]
-    run_site(site)
+    parser = argparse.ArgumentParser(
+        description="Autonomous 2048 game player using Playwright and Qwen-VL"
+    )
+    parser.add_argument(
+        "--sites",
+        nargs="+",
+        choices=[cfg.name for cfg in SITE_CONFIGS],
+        help="Space-separated site configuration names to run. Runs all by default.",
+    )
+    args = parser.parse_args()
 
-    # from concurrent.futures import ThreadPoolExecutor
-    # max_workers = len(SITE_CONFIGS)
-    #
-    # log.info(f"Starting {max_workers} parallel automation tasks...")
-    #
-    # with ThreadPoolExecutor(max_workers=max_workers, thread_name_prefix="PlaywrightWorker") as executor:
-    #     executor.map(run_site, SITE_CONFIGS)
+    selected_configs: list[SiteConfig] = (
+        [cfg for cfg in SITE_CONFIGS if cfg.name in args.sites]
+        if args.sites
+        else SITE_CONFIGS
+    )
+
+    max_workers: int = len(selected_configs)
+
+    log.info(
+        f"Starting {max_workers} parallel automation tasks for: "
+        f"{[cfg.name for cfg in selected_configs]}"
+    )
+
+    with ThreadPoolExecutor(
+        max_workers=max_workers,
+        thread_name_prefix="PlaywrightWorker",
+    ) as executor:
+        executor.map(run_site, selected_configs)
+
+    log.info("Program execution completed. All workers have finished.")

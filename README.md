@@ -86,7 +86,10 @@ Review and adjust the variables inside `.env` if necessary:
 
 ## Usage
 
-Execute the module from the root directory. Since the project uses a `src/` layout, explicitly provide the `src` path to `PYTHONPATH` if the package was not installed in editable mode:
+Execute the module from the root directory. Since the project uses a `src/` layout, explicitly provide the `src` path to `PYTHONPATH` if the package was not installed in editable mode.
+
+### Run All Sites (Default)
+By default, the script will run parallel automation tasks for all configured sites:
 
 ```bash
 # On Linux/macOS
@@ -97,6 +100,34 @@ set PYTHONPATH=src && python -m ai_2048.main
 
 # On Windows (PowerShell)
 \$env:PYTHONPATH="src"; python -m ai_2048.main
+```
+
+### Run Specific Sites
+To run only selected sites, append the `--sites` flag with space-separated configuration names:
+
+```bash
+# On Linux/macOS
+PYTHONPATH=src python -m ai_2048.main --sites paradite mgarciaisaia
+
+# On Windows (Command Prompt)
+set PYTHONPATH=src && python -m ai_2048.main --sites paradite mgarciaisaia
+
+# On Windows (PowerShell)
+\$env:PYTHONPATH="src"; python -m ai_2048.main --sites paradite mgarciaisaia
+```
+
+### Help and Available Configurations
+To view the description and the full list of available site configurations, run:
+
+```bash
+# Example for Linux/macOS
+PYTHONPATH=src python -m ai_2048.main --help
+
+# On Windows (Command Prompt)
+set PYTHONPATH=src && python -m ai_2048.main --help
+
+# On Windows (PowerShell)
+\$env:PYTHONPATH="src"; python -m ai_2048.main --help
 ```
 
 ## Running Tests
