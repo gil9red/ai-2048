@@ -2,6 +2,36 @@
 
 An autonomous 2048 game bot that plays in the browser via `Playwright` and uses the `Qwen Vision-Language Model (VLM)` for grid recognition.
 
+## Demo
+
+<details>
+<summary><b>paradite</b></summary>
+<br/>
+
+![Paradite](assets/paradite.gif)
+</details>
+
+<details>
+<summary><b>tpaddon</b></summary>
+<br/>
+   
+![tpaddon](assets/tpaddon.gif)
+</details>
+
+<details>
+<summary><b>adamalston</b></summary>
+<br/>
+
+![adamalston](assets/adamalston.gif)
+</details>
+
+<details>
+<summary><b>mgarciaisaia</b></summary>
+<br/>
+
+![mgarciaisaia](assets/mgarciaisaia.gif)
+</details>
+
 ## Prerequisites
 
 The project uses [Ollama](https://ollama.com) to run the vision model locally. Make sure Ollama is installed and running on your system, then pull the required model (ensure this matches the `OLLAMA_MODEL` variable in your `.env` file):
