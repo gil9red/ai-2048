@@ -44,7 +44,9 @@ def wait_for_element_screenshot(page: Page, selector: str) -> bytes:
 
 
 def click_any_element(
-    page: Page, selectors: list[str], timeout_ms: int = 1_000
+    page: Page,
+    selectors: list[str],
+    timeout_ms: int = 1_000,
 ) -> bool:
     log.debug(f"Click any elements by: {selectors}")
     for selector in selectors:
@@ -61,9 +63,10 @@ def click_any_element(
 
 
 def make_single_move(page: Page, site: SiteConfig) -> bool:
+    timestamp_str: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     img_data: bytes = wait_for_element_screenshot(page, site.selector_board)
     log.debug(
-        f"{datetime.now():%Y-%m-%d %H:%M:%S}. Screenshot ({len(img_data)} bytes): {img_data[:50]}..."
+        f"{timestamp_str}. Screenshot ({len(img_data)} bytes): {img_data[:50]}..."
     )
 
     board: Board | None = get_board_from_image(img_data)
